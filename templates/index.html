@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Modal Sentiment Analysis</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Multi-Modal Sentiment Analysis</h1>
+        
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <label for="text">Enter text for sentiment analysis:</label>
+            <textarea name="text" id="text" rows="3" required>{{ user_text }}</textarea>
+            
+            <label for="file">Upload an image for sentiment analysis:</label>
+            <input type="file" name="file" id="file" required>
+            
+            <button type="submit">Analyze Sentiment</button>
+        </form>
+        
+        {% if text_sentiment %}
+        <div class="result">
+            <h2>Text Sentiment: {{ text_sentiment }}</h2>
+            <h2>Image Sentiment: {{ image_sentiment }}</h2>
+            <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Image" width="300">
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
